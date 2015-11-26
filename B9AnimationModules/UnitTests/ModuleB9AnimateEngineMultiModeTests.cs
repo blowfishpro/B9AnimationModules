@@ -71,8 +71,6 @@ namespace B9AnimationModules.UnitTests
             
             multiModeEngine.runningPrimary = true;
             primaryEngine.EngineIgnited = true;
-            primaryEngine.throttleLocked = false;
-            primaryEngine.useEngineResponseTime = false;
             primaryEngine.thrustPercentage = 100f;
 
             module.machCurvePrimary = new FloatCurve();
@@ -118,8 +116,6 @@ namespace B9AnimationModules.UnitTests
             multiModeEngine.runningPrimary = false;
             primaryEngine.EngineIgnited = false;
             secondaryEngine.EngineIgnited = true;
-            secondaryEngine.throttleLocked = false;
-            secondaryEngine.useEngineResponseTime = false;
             secondaryEngine.thrustPercentage = 100f;
 
             module.throttleCurveSecondary = new FloatCurve();
