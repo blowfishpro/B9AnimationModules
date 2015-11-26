@@ -38,21 +38,23 @@ namespace B9AnimationModules
             return anims;
         }
 
-        public virtual AnimationState[] SetupAnimations(Animation[] anims)
+        public virtual AnimationState[] SetupAnimations(Animation[] anims, string name)
         {
-            AnimationState[] states = new AnimationState[anims.Length];
+            List<AnimationState> states = new List<AnimationState>();
             for (int i = 0; i < anims.Length; i++)
             {
                 Animation anim = anims[i];
-                AnimationState animState = anim[anim.name];
+                AnimationState animState = anim?[name];
+                if (animState == null)
+                    continue;
                 animState.speed = 0;
                 animState.enabled = true;
                 animState.layer = layer;
-                anim.Play(anim.name);
-                states[i] = animState;
+                anim.Play(name);
+                states.Add(animState);
             }
 
-            return states;
+            return states.ToArray();
         }
 
         public virtual float TargetAnimationState()
@@ -77,7 +79,7 @@ namespace B9AnimationModules
         public override void OnStart(PartModule.StartState state)
         {
             Animation[] anims = FindAnimations(animationName);
-            animStates = SetupAnimations(anims);
+            animStates = SetupAnimations(anims, animationName);
         }
 
         #endregion
