@@ -27,7 +27,36 @@ namespace B9AnimationModules
 
         #endregion
 
-        #region Methods
+        #region Setup
+
+        public override void OnStart(PartModule.StartState state)
+        {
+            Animation[] anims = FindAnimations(animationName);
+            animStates = SetupAnimations(anims, animationName);
+        }
+
+        #endregion
+
+        #region Update
+
+        protected virtual void Update()
+        {
+            float target = TargetAnimationState();
+            animationState = HandleResponseSpeed(target);
+            SetAnimationState(animationState);
+        }
+
+        protected virtual void SetAnimationState(float state)
+        {
+            for (int i = 0; i < animStates.Length; i++)
+            {
+                animStates[i].normalizedTime = animationState;
+            }
+        }
+
+        #endregion
+
+        #region Overrideable Methods
 
         public virtual Animation[] FindAnimations(string name)
         {
@@ -70,35 +99,6 @@ namespace B9AnimationModules
         public virtual float GetDeltaTime()
         {
             return TimeWarp.fixedDeltaTime;
-        }
-
-        #endregion
-
-        #region Setup
-
-        public override void OnStart(PartModule.StartState state)
-        {
-            Animation[] anims = FindAnimations(animationName);
-            animStates = SetupAnimations(anims, animationName);
-        }
-
-        #endregion
-
-        #region Update
-
-        protected virtual void Update()
-        {
-            float target = TargetAnimationState();
-            animationState = HandleResponseSpeed(target);
-            SetAnimationState(animationState);
-        }
-
-        protected virtual void SetAnimationState(float state)
-        {
-            for (int i = 0; i < animStates.Length; i++)
-            {
-                animStates[i].normalizedTime = animationState;
-            }
         }
 
         #endregion
