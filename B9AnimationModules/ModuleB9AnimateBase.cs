@@ -107,12 +107,12 @@ namespace B9AnimationModules
 
         public void LogError(string message)
         {
-            string str = "Module " + name;
+            string str = "Error on module " + moduleName;
             if (part?.partInfo != null)
                 str += " on part " + part.partInfo.name;
             str += ": ";
             str += message;
-            Debug.LogError(message);
+            Debug.LogError(str);
         }
 
         #endregion

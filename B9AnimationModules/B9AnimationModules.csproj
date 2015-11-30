@@ -45,11 +45,13 @@
     <Compile Include="ModuleB9AnimateBase.cs" />
     <Compile Include="ModuleB9AnimateIntake.cs" />
     <Compile Include="ModuleB9AnimateEngineMultiMode.cs" />
+    <Compile Include="ModuleB9AnimateThrottle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\B9AnimateTestBase.cs" />
     <Compile Include="UnitTests\ModuleB9AnimateBaseTests.cs" />
     <Compile Include="UnitTests\ModuleB9AnimateEngineMultiModeTests.cs" />
     <Compile Include="UnitTests\ModuleB9AnimateIntakeTests.cs" />
+    <Compile Include="UnitTests\ModuleB9AnimateThrottleTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

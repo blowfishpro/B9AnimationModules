@@ -38,6 +38,24 @@ namespace B9AnimationModules.UnitTests
             assertEquals("Finds the MultiModeEngine", module.FindMultiModeModule(), multiModeEngine);
         }
 
+        [TestInfo("TestGetThrottleSetting")]
+        public void TestGetThrottleSetting()
+        {
+            part.Modules.Remove(multiModeEngine);
+            module.OnStart(PartModule.StartState.None);
+
+            assertEquals("It gives zero when the multi mode engine cannot be found", module.GetThrottleSetting(), 0f);
+
+            part.Modules.Add(multiModeEngine);
+            module.OnStart(PartModule.StartState.None);
+
+            multiModeEngine.runningPrimary = true;
+            float throttle = 0.12345f;
+            primaryEngine.currentThrottle = throttle;
+
+            assertEquals("It gives the correct throttle normally", module.GetThrottleSetting(), throttle);
+        }
+
         [TestInfo("TestGetMachNumber")]
         public void TestGetMachNumber()
         {
