@@ -1,6 +1,11 @@
 {
   "NAME": "B9 Animation Modules",
+  "DOWNLOAD" : "https://github.com/blowfishpro/B9AnimationModules/releases",
   "URL": "https://raw.githubusercontent.com/blowfishpro/B9AnimationModules/master/GameData/B9AnimationModules/B9AnimationModules.version",
+  "GITHUB" : {
+    "USERNAME"   : "blowfishpro",
+    "REPOSITORY" : "B9AnimationModules"
+  },
   "VERSION": {
     "MAJOR": 0,
     "MINOR": 1,
