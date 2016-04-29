@@ -16,14 +16,5 @@
             "find"       : "B9AnimationModules",
             "install_to" : "GameData"
         }
-    ],
-    "x_netkan_override": [
-        {
-            "version": "v1.0.1",
-            "delete": [ "ksp_version" ],
-            "override": {
-                "ksp_version": "1.1.0"
-            }
-        }
     ]
 }
