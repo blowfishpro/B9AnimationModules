@@ -41,7 +41,7 @@ namespace B9AnimationModules
 
         protected virtual void Update()
         {
-            float target = TargetAnimationState();
+            float target = GetTargetAnimationState();
             animationState = HandleResponseSpeed(target);
             SetAnimationState(animationState);
         }
@@ -86,20 +86,11 @@ namespace B9AnimationModules
             return states.ToArray();
         }
 
-        public virtual float TargetAnimationState()
-        {
-            return 0f;
-        }
+        public virtual float GetTargetAnimationState() => 0f;
 
-        public virtual float HandleResponseSpeed(float target)
-        {
-            return Mathf.Lerp(animationState, target, responseSpeed * 25f * GetDeltaTime());
-        }
-
-        public virtual float GetDeltaTime()
-        {
-            return TimeWarp.fixedDeltaTime;
-        }
+        public virtual float HandleResponseSpeed(float target) => Mathf.Lerp(animationState, target, responseSpeed * 25f * DeltaTime);
+        
+        public virtual float DeltaTime => TimeWarp.fixedDeltaTime;
 
         #endregion
 

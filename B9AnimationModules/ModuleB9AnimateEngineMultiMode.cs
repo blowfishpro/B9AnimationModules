@@ -41,7 +41,7 @@ namespace B9AnimationModules
                 LogError("Cannot find MultiModeEngine");
         }
 
-        public override float TargetAnimationState()
+        public override float GetTargetAnimationState()
         {
             float state;
 

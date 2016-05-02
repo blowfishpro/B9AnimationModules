@@ -74,7 +74,7 @@ namespace B9AnimationModules.UnitTests
             float throttle = 0.12345f;
             engineModule.currentThrottle = throttle;
 
-            assertEquals("It gives the correct throttle", module.TargetAnimationState(), throttle);
+            assertEquals("It gives the correct throttle", module.GetTargetAnimationState(), throttle);
         }
     }
 }

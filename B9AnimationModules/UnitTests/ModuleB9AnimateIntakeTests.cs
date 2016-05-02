@@ -43,24 +43,24 @@ namespace B9AnimationModules.UnitTests
             module.machCurve.Add(0f, 0f);
             module.OnStart(PartModule.StartState.None);
             intake.intakeEnabled = false;
-            assertEquals("State is correct when intake is disabled", module.TargetAnimationState(), state);
+            assertEquals("State is correct when intake is disabled", module.GetTargetAnimationState(), state);
 
             module.machCurve = new FloatCurve();
             module.machCurve.Add(1f, 0f, 1f, 1f);
             module.machCurve.Add(2f, 1f, 1f, 1f);
             intake.intakeEnabled = true;
             part.machNumber = 1.5f;
-            assertEquals("State is correct inside float curve range", module.TargetAnimationState(), 0.5f);
+            assertEquals("State is correct inside float curve range", module.GetTargetAnimationState(), 0.5f);
 
             module.machCurve = new FloatCurve();
             module.machCurve.Add(0f, 2f);
             part.machNumber = 1.5f;
-            assertEquals("State is clamped to maximum of 1", module.TargetAnimationState(), 1f);
+            assertEquals("State is clamped to maximum of 1", module.GetTargetAnimationState(), 1f);
 
             module.machCurve = new FloatCurve();
             module.machCurve.Add(0f, -1f);
             part.machNumber = 1.5f;
-            assertEquals("State is clamped to minimum of 0", module.TargetAnimationState(), 0f);
+            assertEquals("State is clamped to minimum of 0", module.GetTargetAnimationState(), 0f);
         }
     }
 }

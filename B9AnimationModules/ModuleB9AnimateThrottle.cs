@@ -19,10 +19,7 @@ namespace B9AnimationModules
             engine = FindEngine();
         }
 
-        public override float TargetAnimationState()
-        {
-            return GetThrottleSetting();
-        }
+        public override float GetTargetAnimationState() => GetThrottleSetting();
 
         public IEngineStatus FindEngine()
         {
@@ -37,26 +34,15 @@ namespace B9AnimationModules
             }
             else
             {
-                for (int i = 0; i < part.Modules.Count; i++)
-                {
-                    if (!(part.Modules[i] is ModuleEngines)) continue;
+                var engine = part.Modules.OfType<IEngineStatus>().FirstOrDefault(module => module.engineName == engineID);
+                
+                if (engine == null)
+                    LogError("Cannot find engine module with engineID '" + engineID + "'");
 
-                    ModuleEngines module = part.Modules[i] as ModuleEngines;
-
-                    if (module.engineID != engineID) continue;
-
-                    return module;
-                }
-
-                LogError("Cannot find engine module with engineID '" + engineID + "'");
-
-                return null;
+                return engine;
             }
         }
 
-        public float GetThrottleSetting()
-        {
-            return engine?.throttleSetting ?? 0f;
-        }
+        public float GetThrottleSetting() => engine?.throttleSetting ?? 0f;
     }
 }

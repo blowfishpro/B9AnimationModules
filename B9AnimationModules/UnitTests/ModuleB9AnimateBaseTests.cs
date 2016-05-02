@@ -14,15 +14,12 @@ namespace B9AnimationModules.UnitTests
         public float targetAnimationState = 0f;
         public float deltaTime = 0.1f;
 
-        public override float TargetAnimationState()
+        public override float GetTargetAnimationState()
         {
             return targetAnimationState;
         }
 
-        public override float GetDeltaTime()
-        {
-            return deltaTime;
-        }
+        public override float DeltaTime => deltaTime;
     }
 
     public class ModuleB9AnimateBaseTests : B9AnimateTestBase<ModuleB9AnimateBaseTestable>

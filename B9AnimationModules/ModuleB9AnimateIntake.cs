@@ -39,7 +39,7 @@ namespace B9AnimationModules
             return (float)part.machNumber;
         }
 
-        public override float TargetAnimationState()
+        public override float GetTargetAnimationState()
         {
             if (intake && !intake.intakeEnabled)
                 return intakeClosedState;
