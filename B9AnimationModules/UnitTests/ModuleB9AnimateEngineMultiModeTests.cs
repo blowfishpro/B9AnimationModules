@@ -18,8 +18,6 @@ namespace B9AnimationModules.UnitTests
         public override void TestStartUp()
         {
             base.TestStartUp();
-            
-            part.isControlSource = true;
 
             primaryEngine = AddPartModule<ModuleEnginesFX>();
             secondaryEngine = AddPartModule<ModuleEnginesFX>();
