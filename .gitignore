@@ -38,6 +38,7 @@ dlldata.c
 *_i.c
 *_p.c
 *_i.h
+*.dll
 *.ilk
 *.meta
 *.obj
@@ -233,3 +234,6 @@ $RECYCLE.BIN/
 # Other
 *.zip
 .vs/*
+Properties/
+
+!/bin/
