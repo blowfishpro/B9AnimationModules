@@ -33,6 +33,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
+[assembly: AssemblyInformationalVersionAttribute("<%= git_version %>")]
 [assembly: AssemblyVersion("<%= mod_version.to_s(4) %>")]
 [assembly: AssemblyFileVersion("<%= mod_version.to_s(4) %>")]
 
