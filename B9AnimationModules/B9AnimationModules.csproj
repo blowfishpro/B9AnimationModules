@@ -58,7 +58,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
-sh -e -c " mkdir -p '$(SolutionDir)/GameData/B9AnimationModules/Plugins/' &amp;&amp; cp '$(TargetPath)' '$(SolutionDir)/GameData/B9AnimationModules/Plugins/'"
+      sh -e -c " mkdir -p '$(SolutionDir)/GameData/B9AnimationModules/Plugins/' &amp;&amp; cp '$(TargetPath)' '$(SolutionDir)/GameData/B9AnimationModules/Plugins/'"
     </PostBuildEvent>
   </PropertyGroup>
 </Project>
