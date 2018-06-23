@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'English'
 require 'erb'
 require 'getoptlong'
 require 'json'
+require 'open3'
 
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 
 class Version
   def initialize(str)
@@ -41,17 +41,18 @@ class Version
   end
 end
 
-FillVersionViewModel = Struct.new(:ksp_version, :ksp_version_min, :ksp_version_max, :mod_version) do
+FillVersionViewModel = Struct.new(:ksp_version, :ksp_version_min, :ksp_version_max, :mod_version, :git_version) do
   def render(template)
     ERB.new(template).result(binding)
   end
 end
 
-def run(command, puts_result: false)
-  result = `#{command}`
-  STDERR.puts result if puts_result
-  raise "Command `#{command}` exited with code #{$CHILD_STATUS.exitstatus}" unless $CHILD_STATUS.success?
-  result
+class CommandFailure < StandardError; end
+
+def run(command)
+  stdout, _stderr, status = Open3.capture3(command)
+  raise CommandFailure, "Command `#{command}` exited with code #{status.exitstatus}" unless status.success?
+  stdout
 end
 
 def usage
@@ -137,13 +138,23 @@ ksp_version = Version.new(ksp_version)
 ksp_version_min = Version.new(ksp_version_min) unless ksp_version_min.nil?
 ksp_version_max = Version.new(ksp_version_max) unless ksp_version_max.nil?
 
+is_git_dir =
+  begin
+    run('git rev-parse --git-dir')
+    true
+  rescue CommandFailure
+    false
+  end
+
+git_version = is_git_dir ? run('git describe --tags --dirty').strip : nil
+
 mod_version =
   if !mod_version.nil?
     Version.new(mod_version)
   elsif ENV['MOD_VERSION']
     Version.new(ENV['MOD_VERSION'])
-  elsif run("git rev-parse --git-dir >/dev/null 2>/dev/null && echo 'true' || echo 'false'").strip == 'true'
-    Version.new(run('git describe --tags').match(/[0-9\.-]+/)[0].tr('-', '.'))
+  elsif is_git_dir
+    Version.new(git_version.match(/[0-9\.-]+/)[0].tr('-', '.'))
   else
     STDERR.puts 'mod version not specified and no way to determine it'
     exit 1
@@ -168,7 +179,7 @@ template_contents =
     exit 1
   end
 
-view_model = FillVersionViewModel.new(ksp_version, ksp_version_min, ksp_version_max, mod_version)
+view_model = FillVersionViewModel.new(ksp_version, ksp_version_min, ksp_version_max, mod_version, git_version)
 result = view_model.render(template_contents)
 
 if out_file.nil?

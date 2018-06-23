@@ -53,18 +53,12 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
-sh -e &lt;&lt; CMD
-  cd '$(SolutionDir)'
-  bin/fill-version 'templates/AssemblyInfo.cs.erb' '$(ProjectDir)/Properties/AssemblyInfo.cs'
-CMD
+      sh -e -c "cd '$(SolutionDir)' &amp;&amp; 'bin/fill-version' '$(SolutionDir)/templates/AssemblyInfo.cs.erb' '$(ProjectDir)/Properties/AssemblyInfo.cs'"
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
-sh -e &lt;&lt; CMD
-  mkdir -p '$(SolutionDir)/GameData/B9AnimationModules/Plugins/'
-  cp '$(TargetPath)' '$(SolutionDir)/GameData/B9AnimationModules/Plugins/'
-CMD
+sh -e -c " mkdir -p '$(SolutionDir)/GameData/B9AnimationModules/Plugins/' &amp;&amp; cp '$(TargetPath)' '$(SolutionDir)/GameData/B9AnimationModules/Plugins/'"
     </PostBuildEvent>
   </PropertyGroup>
 </Project>
