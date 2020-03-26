@@ -65,7 +65,7 @@ A simple module designed to animate based off an engine throttle.  Replicates mu
 
 ## Changelog
 
-### vNEXT
+### v1.7.0
 
 * Recompile against KSP 1.9.1
 
